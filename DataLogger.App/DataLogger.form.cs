@@ -19,9 +19,11 @@ namespace DataLogger.App
             {
                 csvLoader.ImportCSV(CSV.FileName);
             }
-            catch
+
+            catch(Exception ex)
             {
-                MessageBox.Show("fehlerhaftes CSV-File");
+                if (ex.Message == "invalid CSV-File") MessageBox.Show("fehlerhaftes CSV-File");
+                else MessageBox.Show(ex.Message);
             }
         }
     }
