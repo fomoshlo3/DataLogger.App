@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataLogger.lib
 {
-    internal class CSVLoader
+    public class CSVLoader
     {
         public List<IWeatherData> WeatherData{ get; set;}
 
@@ -21,8 +21,20 @@ namespace DataLogger.lib
             if (line != "Time;Wind speed;Temperature") throw new Exception("Kann nicht laden weil Header fehlt.");
             while(line != string.Empty)
             {
-                    throw new NotImplementedException();
+                string[] split = line.Split(';');
+                DateTime timeStamp = DateTime.Parse(split[0]);
+                WeatherData.Add(new WindSpeed()
+                {
+                    TimeStamp = timeStamp,
+                    Value = double.Parse(split[1], System.Globalization.CultureInfo.InvariantCulture)
+                });
+                WeatherData.Add(new Temperature()
+                {
+                    TimeStamp = timeStamp,
+                    Value = double.Parse(split[2], System.Globalization.CultureInfo.InvariantCulture)
+                });
             }
+            sr.Close();
         }
     }
 }
