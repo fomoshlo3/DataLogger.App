@@ -19,8 +19,9 @@ namespace DataLogger.lib
             string line = sr.ReadLine();
 
             if (line != "Time;Wind speed;Temperature") throw new Exception("Kann nicht laden weil Header fehlt.");
-            while(line != string.Empty)
+            while(line != null)
             {
+                line = sr.ReadLine();
                 string[] split = line.Split(';');
                 DateTime timeStamp = DateTime.Parse(split[0]);
                 WeatherData.Add(new WindSpeed()
