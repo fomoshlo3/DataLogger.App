@@ -15,6 +15,14 @@ namespace DataLogger.lib
             WeatherData = new List<IWeatherData>();
 
             StreamReader sr = new StreamReader(path);
+            
+            string line = sr.ReadLine();
+
+            if (line != "Time;Wind speed;Temperature") throw new Exception("Kann nicht laden weil Header fehlt.");
+            while(line != string.Empty)
+            {
+                    throw new NotImplementedException();
+            }
         }
     }
 }
