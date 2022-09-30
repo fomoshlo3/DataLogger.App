@@ -8,32 +8,34 @@ namespace DataLogger.lib
 {
     public class CSVLoader
     {
-        public List<IWeatherData> WeatherData{ get; set;}
-
+        public List<IWeatherData> WindSpeed { get; set; }
+        public List<IWeatherData> Temperature { get; set; }
         public void ImportCSV(string path)
         {
-            WeatherData = new List<IWeatherData>();
-
+            WindSpeed = new List<IWeatherData>();
+            Temperature = new List<IWeatherData>();
             StreamReader sr = new StreamReader(path);
             
-            string line = sr.ReadLine();
+            string? line = sr.ReadLine();
 
             if (line != "Time;Wind speed;Temperature") throw new Exception("Kann nicht laden weil Header fehlt.");
-            while(line != null)
+            line = sr.ReadLine();
+            while (line != null)
             {
-                line = sr.ReadLine();
+               
                 string[] split = line.Split(';');
                 DateTime timeStamp = DateTime.Parse(split[0]);
-                WeatherData.Add(new WindSpeed()
+                WindSpeed.Add(new WindSpeed()
                 {
                     TimeStamp = timeStamp,
                     Value = double.Parse(split[1], System.Globalization.CultureInfo.InvariantCulture)
                 });
-                WeatherData.Add(new Temperature()
+                Temperature.Add(new Temperature()
                 {
                     TimeStamp = timeStamp,
                     Value = double.Parse(split[2], System.Globalization.CultureInfo.InvariantCulture)
                 });
+                line = sr.ReadLine();
             }
             sr.Close();
         }

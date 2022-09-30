@@ -19,10 +19,16 @@ namespace DataLogger.App
             {
                 csvLoader.ImportCSV(CSV.FileName);
             }
-            catch
+
+            catch(Exception ex)
             {
-                MessageBox.Show("fehlerhaftes CSV-File");
+                if (ex.Message == "invalid CSV-File") MessageBox.Show("fehlerhaftes CSV-File");
+                else MessageBox.Show(ex.Message);
             }
+            foreach (IWeatherData item in csvLoader.WindSpeed) ListBoxWeather.Items.Add(item);
+            foreach (IWeatherData item in csvLoader.Temperature) ListBoxTemperature.Items.Add(item);
         }
+
+       
     }
 }

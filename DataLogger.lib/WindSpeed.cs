@@ -2,13 +2,13 @@
 {
     public class WindSpeed : IWeatherData
     {
-        public DateTime TimeStamp { get; set; }   // properties
+        public DateTime TimeStamp { get; set; }   // props
 
-        public double? Value { get; set; } = null;
+        public double? Value { get; set; } = null; //
 
-        public override string ToString()
+        public override string ToString() //
         {
-            return $"Windgeschwindigkeit: {Value} km/h ({TimeStamp})";
+            return $"Windgeschwindigkeit: {Value} km/h ({TimeStamp})"; //
         }
     }
 }
